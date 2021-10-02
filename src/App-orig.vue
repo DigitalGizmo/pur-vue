@@ -1,19 +1,15 @@
 <template>
-  <h1>{{ title }}</h1>
-  <Archive msg="Welcome to Your evolving archive items"/>
+  <img alt="Vue logo" src="./assets/logo.png">
+  <HelloWorld msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
-import Archive from './components/Archive.vue'
+import HelloWorld from './components/HelloWorld.vue'
+
 export default {
   name: 'App',
-  data() {
-    return {
-      title: 'My begining app',
-    }
-  },
   components: {
-    Archive
+    HelloWorld
   }
 }
 </script>
