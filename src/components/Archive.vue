@@ -1,15 +1,20 @@
 <template>
   <h2>{{ title }}  Archive</h2>
   <p>msg:  {{ msg }} </p>
-  <ul v-if="result && result.characters.results">
-    <li v-for="whammy of result.characters.results" :key="whammy.name">
-      {{ whammy.name }}
+  <div v-if="loading">Loading...</div>
+
+  <div v-else-if="error">Error: {{ error.message }} </div>
+
+  <ul v-else-if="persons">
+    <li v-for="person of persons" :key="person.name">
+      {{ person.name }}
     </li>
   </ul>
 </template>
 
 <script>
-import { useQuery } from '@vue/apollo-composable'
+// import { useQuery } from '@vue/apollo-composable'
+import { useQuery, useResult } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 
 export default {
@@ -18,7 +23,7 @@ export default {
     msg: String
   },
   setup () {
-    const { result } = useQuery(gql`
+    const { result, loading, error } = useQuery(gql`
       query getCharacters {
         characters {
           results {
@@ -28,8 +33,13 @@ export default {
       }      
     `)
 
+    const persons = useResult(result, null, data => data.characters.results)
+
     return {
-      result,
+      // result,
+      persons,
+      loading,
+      error,
     }
   },
   data() {
