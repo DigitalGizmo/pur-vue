@@ -1,10 +1,10 @@
 <template>
   <h1>{{ title }}</h1>
-  <Archive msg="Welcome to Your evolving archive items"/>
+  <ArchiveTest msg="Welcome to Your evolving archive items"/>
 </template>
 
 <script>
-import Archive from './components/Archive.vue'
+import ArchiveTest from './components/ArchiveTest.vue'
 export default {
   name: 'App',
   data() {
@@ -13,7 +13,7 @@ export default {
     }
   },
   components: {
-    Archive
+    ArchiveTest
   }
 }
 </script>
