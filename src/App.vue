@@ -1,31 +1,37 @@
 <template>
-  <h1>{{ title }}</h1>
-  <ArchiveTest msg="Welcome to your evolving archive items"/>
+  <h1>Picturing Urban Renewal</h1>
+  <ul  id="main-menu">
+    <li>Home | </li>
+    <li>Personal Stories | </li>
+    <li>Visual Record</li>
+  </ul>
+  <Visuals />
 </template>
 
 <script>
-import ArchiveTest from './components/ArchiveTest.vue'
+import Visuals from './components/Visuals.vue'
+
 export default {
   name: 'App',
-  data() {
-    return {
-      title: 'Picturing Urban Renewal',
-    }
-  },
+  // data() {
+  //   return {
+  //     title: 'Picturing Urban Renewal',
+  //   }
+  // },
   components: {
-    ArchiveTest
+    Visuals
   }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  /* */
+}
+
+/* Don's freelancing */
+#main-menu li {
+  display: inline;
 }
 
 /* From Treat Map  */

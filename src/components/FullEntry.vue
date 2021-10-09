@@ -6,11 +6,11 @@
       </p>
 
       <header>
-        <h2>{{ archive_items[currIndex].title }}</h2>
+        <h2>{{ images[currIndex].title }}</h2>
       </header>
 
       <img :src="'http://dev.picturingurbanrenewal.org/prod-assets/archive/fullpics/' + 
-        archive_items[currIndex].slug + '.jpg'" class="fullpic">
+        images[currIndex].slug + '.jpg'" class="fullpic">
 
     </div><!-- /#slippop-wrapper -->
   </div><!-- /.lightbox -->
@@ -19,10 +19,7 @@
 <script>
 export default {
   props: {
-    entry: {
-      type: Object
-    },
-    archive_items: {
+    images: {
       type: Object
     },
     currIndex: Number,
@@ -32,7 +29,7 @@ export default {
 </script>
 
 <style>
-/* shared styles for journal and credits popups in Treat.vue, specific styles here and Credits.vue */
+/* These styles are straight from Treat Map */
   .entry-pop {
     margin: 5% auto;
     height: 80%;
@@ -70,10 +67,9 @@ export default {
     font-style: italic;
   }
 
+  /*Don free-lancing*/
   img.fullpic {
     height: 45%;
-
   }
-
 
 </style>
