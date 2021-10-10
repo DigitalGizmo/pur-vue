@@ -54,13 +54,15 @@ export default {
   // Composable-based graphql for the image list from admin
   setup () {
     const { result, loading, error } = useQuery(gql`
-      query getImages {
-          all_images{
+      query getImages ($city_id: Int){
+          all_images(city_id: $city_id){
               slug
               title
           }
       }
-    `)
+    `, {
+      city_id: null
+    })
     const images = useResult(result, null, data => data.all_images)
     return {
       // result,

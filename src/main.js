@@ -10,9 +10,8 @@ import App from './App.vue'
 
 const httpLink = createHttpLink({
     // uri: process.env.VUE_APP_SOURCELINK_API_URL,
-
     uri: 'http://admin.picturingurbanrenewal.org/archive/graphql/'
-
+    // uri: 'http://127.0.0.1:8000/archive/graphql/'
     // uri: 'https://rickandmortyapi.com/graphql',
 })
 
