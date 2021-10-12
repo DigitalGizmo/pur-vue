@@ -6,7 +6,10 @@
       </p>
 
       <header>
-        <h2>{{ images[currIndex].title }}</h2>
+        <h1>{{ images[currIndex].title }}</h1>
+        <p>Amateur photographer Gene Dauner stands on a downtown Kingston rooftop, looking to the north toward the Broadway East urban renewal project area.</p>
+        <p>date: 1967</p>
+        <p>Courtesy of Gene Dauner</p>
       </header>
 
       <img :src="'http://dev.picturingurbanrenewal.org/prod-assets/archive/fullpics/' + 
@@ -30,46 +33,31 @@ export default {
 
 <style>
 /* These styles are straight from Treat Map */
-  .entry-pop {
-    margin: 5% auto;
-    height: 80%;
-    width: 60%;
-  }
+.entry-pop {
+  margin: 5% auto;
+  height: 80%;
+  width: 60%;
+}
 
-  header {
-    h1 {
-      font-size: 2.5em;
-      font-style: italic;
-      margin: 0;
-    }
-  }
+header {
+  max-width: 90%;
+}
 
-  h2 {
-    font-size: 1em;
-    font-variant: small-caps;
-    letter-spacing: .05em;
-    margin: 0;
-  }
+p.close {
+  font-size: 1em;
+  letter-spacing: .05em;
+  max-width: 10%;
+  float: right;
+}
 
-  p.close {
-    font-size: 1em;
-    font-variant: small-caps;
-    letter-spacing: .05em;
-    text-align: right;
-  }
+.close a {
+  color: ;
+}
 
-  .close a {
-    color: #C64C17;
-  }
-
-  span.entry-text p {
-    margin-top: 1em;
-    font-style: italic;
-  }
-
-  /*Don free-lancing*/
-  img.fullpic {
-    height: 45%;
-  }
+img.fullpic {
+  float: left;
+  max-height: 60vh;
+  margin-right:  1em;
+}
 
 </style>

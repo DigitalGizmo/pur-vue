@@ -5,6 +5,7 @@
     <li>Personal Stories | </li>
     <li>Visual Record</li>
   </ul>
+  <!-- Visuals is hard-wired for the time being -->
   <Visuals />
 </template>
 
@@ -25,8 +26,31 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: black;
+}
+
+ul, ol {
+  list-style-type: none;
+  padding:  0;
+}
+
+h1 {
+  font-size: 2em;
+  font-style: italic;
+  font-weight: normal;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.75em;
+  margin: 0;
+}
+
 #app {
-  /* */
+ color:  beige;
+ font-family: sans-serif;
+ padding: 5%;
 }
 
 /* Don's freelancing */
@@ -48,12 +72,11 @@ export default {
 
 /* shared styles for journal and credits popups, specific styles in FullEntry.vue and Credits.vue */
 #slimpop-wrapper {
-  background-color: #eff0de;
-  border: 1px solid #b3aa98;
+  background-color: beige;  
+  border: 1px solid gray;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.75);
-  color: #535442;
-  display: grid;
-  padding: 1em 3em 3em 3em;
+  color: black;
+  padding: 2em;
   position: relative;
 }
 
