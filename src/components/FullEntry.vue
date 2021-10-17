@@ -7,9 +7,9 @@
 
       <header>
         <h1>{{ images[currIndex].title }}</h1>
-        <p>Amateur photographer Gene Dauner stands on a downtown Kingston rooftop, looking to the north toward the Broadway East urban renewal project area.</p>
-        <p>date: 1967</p>
-        <p>Courtesy of Gene Dauner</p>
+        <p>{{ images[currIndex].description }}</p>
+        <p>date: {{ images[currIndex].creation_year }}</p>
+        <p>Courtesy of {{ images[currIndex].source_title }}</p>
       </header>
 
       <img :src="'http://dev.picturingurbanrenewal.org/prod-assets/archive/fullpics/' + 

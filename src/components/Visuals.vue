@@ -112,8 +112,9 @@
     <ul id="menu-list">
       <li v-for="(image, index) of images" :key="image.index">
         <div class="menu-item">
-          <a @click="showFullEntry(index)">
-            <img class="menu-image" 
+          <!-- <a @click="showFullEntry(index)">
+            <p class="pic-title">title here</p></a> -->
+            <a @click="showFullEntry(index)"><img class="menu-image" 
               :src="'http://admin.picturingurbanrenewal.org/media/visuals/thumbpics/' + image.slug + '-tn.jpg'">
           </a>
         </div>
@@ -148,6 +149,9 @@ export default {
           all_images(city_id: $city_id){
               slug
               title
+              description
+              creation_year
+              source_title
           }
       }
     `, {
@@ -196,12 +200,27 @@ export default {
 /* an attempt to include the title of the image but it messes up the layout*/
 .menu-item a {
   font-size: .5em;
+  /*don test*/
+  /*display: inline;*/
+  /*position: relative;*/
+}
+
+.pic-title {
+  display: inline;
+  /*position: relative;*/
+  /*top: -20;*/
+  /*vertical-align: text-top;*/
 }
 
 .menu-image {
   height: 150px;
   width: auto;
   margin: 3px;
+  display: inline;
+  /*don test*/
+  /*clear: left;*/
+  /*position: relative;*/
+  /*top: 20px;*/
 }
 
 .filters {
