@@ -1,6 +1,6 @@
 <template>
   <h2>Visual Record</h2>
-  <h3>103 Images | Filter Images</h3>
+  <h3>103 Images | Filter Images </h3>
   
   <div class="filters">
     <div>
@@ -22,6 +22,9 @@
           <input type="checkbox" id="era-1970s" name="1970s">
           <label for="era-1970s">1970s</label>
         </li>
+        <li>
+          <p><a href="#" @click="showTest">Show Test</a></p>
+        </li>
       </ul>
     </div>
 
@@ -29,24 +32,28 @@
       <p>Cities</p>
       <ul class="filter-set">
         <li>
-          <input type="checkbox" id="city-albany" name="albany">
+          <input type="radio" id="city-albany" name="city" value="5">
           <label for="city-albany">Albany</label>
         </li>
         <li>
-          <input type="checkbox" id="city-kingston" name="kingston">
+          <input type="radio" id="city-kingston" name="city" value="3">
           <label for="city-kingston">Kingston</label>
         </li>
         <li>
-          <input type="checkbox" id="city-newburgh" name="newburgh">
+          <input type="radio" id="city-newburgh" name="city" value="2">
           <label for="city-newburgh">Newburgh</label>
         </li>
         <li>
-          <input type="checkbox" id="city-stuytown" name="stuyvesant town">
+          <input type="radio" id="city-stuytown" name="city" value="4">
           <label for="city-stuytown">Stuyvesant Town</label>
         </li>
         <li>
-          <input type="checkbox" id="city-other" name="other">
+          <input type="radio" id="city-other" name="city" value="6">
           <label for="city-other">Other</label>
+        </li>
+        <li>
+          <input type="radio" id="city-other" name="city" value="null">
+          <label for="city-other">All</label>
         </li>
       </ul>
     </div>
@@ -112,8 +119,8 @@
     <ul id="menu-list">
       <li v-for="(image, index) of images" :key="image.index">
         <div class="menu-item">
-          <!-- <a @click="showFullEntry(index)">
-            <p class="pic-title">title here</p></a> -->
+          <a @click="showFullEntry(index)">
+            <p class="pic-title">title here</p></a>
             <a @click="showFullEntry(index)"><img class="menu-image" 
               :src="'http://admin.picturingurbanrenewal.org/media/visuals/thumbpics/' + image.slug + '-tn.jpg'">
           </a>
@@ -133,6 +140,7 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 import { useQuery, useResult } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 import FullEntry from '../components/FullEntry.vue'
@@ -144,6 +152,25 @@ export default {
   // },
   // Composable-based graphql for the image list from admin
   setup () {
+
+    // Handle slimpop
+    const fullEntryOn = ref(false);
+    const currIndex = ref(0);
+
+    function showTest () {
+      console.log('Here is a test');
+    }
+
+    function showFullEntry (index) {
+      currIndex.value = index;
+      console.log('currIndex: ' + currIndex.value);
+      fullEntryOn.value = true;
+    }
+
+    function closeFullEntry () {
+      fullEntryOn.value = false;
+    }
+
     const { result, loading, error } = useQuery(gql`
       query getImages ($city_id: Int){
           all_images(city_id: $city_id){
@@ -157,33 +184,31 @@ export default {
     `, {
       city_id: null
     })
+
+    // , variables
+
+    // function setCity (city_id) {
+    //   variables.value = {
+    //     city_id,
+    //   }
+    // }
+
     const images = useResult(result, null, data => data.all_images)
     return {
       // result,
       images,
       loading,
       error,
-    }
-  },
-  data() {
-    return {
-      title: 'Primary Source',
-      fullEntryOn: false,
-      currIndex: 0,
+      fullEntryOn: fullEntryOn,
+      currIndex: currIndex,
+      showFullEntry: showFullEntry,
+      closeFullEntry: closeFullEntry,
+      showTest: showTest,
     }
   },
   components: {
     FullEntry
   },
-  methods: {
-    showFullEntry (index) {
-      this.currIndex = index
-      this.fullEntryOn = true
-    },
-    closeFullEntry () {
-      this.fullEntryOn = false
-    },
-  }
 }
 </script>
 
@@ -233,7 +258,6 @@ export default {
 
 .filters ul {
 }
-
 
 </style>
 
