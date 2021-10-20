@@ -136,6 +136,8 @@
       :images="images"
       :currIndex="currIndex"
       :closeFullEntry="closeFullEntry"
+      :nextEntry="nextEntry"
+      :prevEntry="prevEntry"
     >
   </full-entry>
 
@@ -167,6 +169,16 @@ export default {
       fullEntryOn.value = false;
     }
 
+    function nextEntry () {
+      currIndex.value ++;
+    }
+
+    function prevEntry () {
+      if (currIndex.value > 0) {
+        currIndex.value --;  
+      }
+    }
+
     // ------ Data from gql handling -----
     // I used city_id_ref instead of this because
     // I needed a function involved in order to parseInt
@@ -185,6 +197,7 @@ export default {
               description
               creation_year
               source_title
+              location_display
           }
       }
     `, () => ({
@@ -209,6 +222,8 @@ export default {
       currIndex: currIndex,
       showFullEntry: showFullEntry,
       closeFullEntry: closeFullEntry,
+      nextEntry,
+      prevEntry,
       city_id_ref: city_id_ref,
     }
   },

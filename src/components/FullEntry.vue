@@ -2,12 +2,15 @@
   <div class="lightbox" @click.self="closeFullEntry">
     <div id="slimpop-wrapper" class="entry-pop">
       <p class="close">
-        <a @click="closeFullEntry">Close</a>
+        <a @click="prevEntry">Prev</a> |
+        <a @click="closeFullEntry">Close</a> |
+        <a @click="nextEntry">Next</a>
       </p>
 
       <header>
         <h1>{{ images[currIndex].title }}</h1>
         <p>{{ images[currIndex].description }}</p>
+        <p>location: {{ images[currIndex].location_display }}</p>
         <p>date: {{ images[currIndex].creation_year }}</p>
         <p>Courtesy of {{ images[currIndex].source_title }}</p>
       </header>
@@ -27,6 +30,8 @@ export default {
     },
     currIndex: Number,
     closeFullEntry: Function,
+    nextEntry: Function,
+    prevEntry: Function,
   }
 }
 </script>
@@ -44,7 +49,7 @@ header {
 }
 
 p.close {
-  font-size: 1em;
+  font-size: .7em;
   letter-spacing: .05em;
   max-width: 10%;
   float: right;
