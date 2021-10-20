@@ -1,6 +1,6 @@
 <template>
   <h2>Visual Record</h2>
-  <h3>103 Images | Filter Images </h3>
+  <h3># Images | Filter Images </h3>
   
   <div class="filters">
     <div>
@@ -22,9 +22,6 @@
           <input type="checkbox" id="era-1970s" name="1970s">
           <label for="era-1970s">1970s</label>
         </li>
-        <li>
-          <p><a href="#" @click="showTest">Show Test</a></p>
-        </li>
       </ul>
     </div>
 
@@ -32,27 +29,33 @@
       <p>Cities</p>
       <ul class="filter-set">
         <li>
-          <input type="radio" id="city-albany" name="city" value="5">
+          <input type="radio" id="city-albany" name="city" value="5"
+            v-model="city_id_ref">
           <label for="city-albany">Albany</label>
         </li>
-        <li>
-          <input type="radio" id="city-kingston" name="city" value="3">
+       <li>
+          <input type="radio" id="city-kingston" name="city" value="3"
+            v-model="city_id_ref">
           <label for="city-kingston">Kingston</label>
         </li>
-        <li>
-          <input type="radio" id="city-newburgh" name="city" value="2">
+         <li>
+          <input type="radio" id="city-newburgh" name="city" value="2"
+            v-model="city_id_ref">
           <label for="city-newburgh">Newburgh</label>
         </li>
         <li>
-          <input type="radio" id="city-stuytown" name="city" value="4">
+          <input type="radio" id="city-stuytown" name="city" value="4"
+            v-model="city_id_ref">
           <label for="city-stuytown">Stuyvesant Town</label>
         </li>
         <li>
-          <input type="radio" id="city-other" name="city" value="6">
+          <input type="radio" id="city-other" name="city" value="6"
+            v-model="city_id_ref">
           <label for="city-other">Other</label>
         </li>
         <li>
-          <input type="radio" id="city-other" name="city" value="null">
+          <input type="radio" id="city-other" name="city" value="null"
+            v-model="city_id_ref">
           <label for="city-other">All</label>
         </li>
       </ul>
@@ -120,9 +123,8 @@
       <li v-for="(image, index) of images" :key="image.index">
         <div class="menu-item">
           <a @click="showFullEntry(index)">
-            <p class="pic-title">title here</p></a>
-            <a @click="showFullEntry(index)"><img class="menu-image" 
-              :src="'http://admin.picturingurbanrenewal.org/media/visuals/thumbpics/' + image.slug + '-tn.jpg'">
+            <img class="menu-image" 
+            :src="'http://admin.picturingurbanrenewal.org/media/visuals/thumbpics/' + image.slug + '-tn.jpg'">
           </a>
         </div>
       </li>
@@ -147,19 +149,13 @@ import FullEntry from '../components/FullEntry.vue'
 
 export default {
   name: 'Visuals',
-  // props: {
-  //   msg: String
-  // },
+
   // Composable-based graphql for the image list from admin
   setup () {
 
-    // Handle slimpop
+    // ---- Handle slimpop --------
     const fullEntryOn = ref(false);
     const currIndex = ref(0);
-
-    function showTest () {
-      console.log('Here is a test');
-    }
 
     function showFullEntry (index) {
       currIndex.value = index;
@@ -171,6 +167,16 @@ export default {
       fullEntryOn.value = false;
     }
 
+    // ------ Data from gql handling -----
+    // I used city_id_ref instead of this because
+    // I needed a function involved in order to parseInt
+    // import { ref, reactive } from 'vue';    
+    // const variables = reactive({
+    //   city_id: null,
+    // })
+
+    const city_id_ref = ref(null)
+
     const { result, loading, error } = useQuery(gql`
       query getImages ($city_id: Int){
           all_images(city_id: $city_id){
@@ -181,21 +187,21 @@ export default {
               source_title
           }
       }
-    `, {
-      city_id: null
-    })
+    `, () => ({
+      city_id: parseInt(city_id_ref.value)
+    }) )
 
-    // , variables
-
-    // function setCity (city_id) {
-    //   variables.value = {
-    //     city_id,
+    // If I use "variables" directly I could use this:
+    //           ...source_title
+    //       }
     //   }
-    // }
+    // `, variables)
+
+    // ---- end gql -------------------------
 
     const images = useResult(result, null, data => data.all_images)
+
     return {
-      // result,
       images,
       loading,
       error,
@@ -203,12 +209,15 @@ export default {
       currIndex: currIndex,
       showFullEntry: showFullEntry,
       closeFullEntry: closeFullEntry,
-      showTest: showTest,
+      city_id_ref: city_id_ref,
     }
   },
   components: {
     FullEntry
   },
+  // props: {
+  //   msg: String
+  // },
 }
 </script>
 
