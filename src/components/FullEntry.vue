@@ -2,9 +2,9 @@
   <div class="lightbox" @click.self="closeFullEntry">
     <div id="slimpop-wrapper" class="entry-pop">
       <p class="close">
-        <a @click="prevEntry">Prev</a> |
-        <a @click="closeFullEntry">Close</a> |
-        <a @click="nextEntry">Next</a>
+        <a href="#" @click="prevEntry">Prev</a> |
+        <a href="#" @click="nextEntry">Next</a> <br/>
+        <a href="#" @click="closeFullEntry">Close</a>
       </p>
 
       <header>

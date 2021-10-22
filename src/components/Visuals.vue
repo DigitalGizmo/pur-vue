@@ -155,30 +155,6 @@ export default {
   // Composable-based graphql for the image list from admin
   setup () {
 
-    // ---- Handle slimpop --------
-    const fullEntryOn = ref(false);
-    const currIndex = ref(0);
-
-    function showFullEntry (index) {
-      currIndex.value = index;
-      console.log('currIndex: ' + currIndex.value);
-      fullEntryOn.value = true;
-    }
-
-    function closeFullEntry () {
-      fullEntryOn.value = false;
-    }
-
-    function nextEntry () {
-      currIndex.value ++;
-    }
-
-    function prevEntry () {
-      if (currIndex.value > 0) {
-        currIndex.value --;  
-      }
-    }
-
     // ------ Data from gql handling -----
     // I used city_id_ref instead of this because
     // I needed a function involved in order to parseInt
@@ -209,19 +185,46 @@ export default {
     //       }
     //   }
     // `, variables)
+    const images = useResult(result, null, data => data.all_images)
 
     // ---- end gql -------------------------
 
-    const images = useResult(result, null, data => data.all_images)
+
+    // ---- Handle slimpop --------
+    const fullEntryOn = ref(false);
+    const currIndex = ref(0);
+
+    function showFullEntry (index) {
+      currIndex.value = index;
+      console.log('currIndex: ' + currIndex.value);
+      fullEntryOn.value = true;
+    }
+
+    function closeFullEntry () {
+      fullEntryOn.value = false;
+    }
+
+    function nextEntry () {
+      // Next if next exists
+      if (images.value[(parseInt(currIndex.value) + 1)]) {
+        currIndex.value ++;
+      }
+    }
+
+    function prevEntry () {
+      if (currIndex.value > 0) {
+        currIndex.value --;  
+      }
+    }
 
     return {
       images,
       loading,
       error,
-      fullEntryOn: fullEntryOn,
-      currIndex: currIndex,
-      showFullEntry: showFullEntry,
-      closeFullEntry: closeFullEntry,
+      fullEntryOn,
+      currIndex,
+      showFullEntry,
+      closeFullEntry,
       nextEntry,
       prevEntry,
       city_id_ref: city_id_ref,
@@ -274,7 +277,7 @@ export default {
 
 .filters {
   display:  grid;
-  font-size: .75em;
+  font-size: .8em;
   grid-gap: 15px;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
