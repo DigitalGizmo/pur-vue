@@ -173,7 +173,9 @@ export default {
               description
               creation_year
               source_title
-              location_display
+              city
+              district_title
+              street_address
           }
       }
     `, () => ({

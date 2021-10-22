@@ -10,7 +10,11 @@
       <header>
         <h1>{{ images[currIndex].title }}</h1>
         <p>{{ images[currIndex].description }}</p>
-        <p>location: {{ images[currIndex].location_display }}</p>
+        <p v-if="images[currIndex].street_address">location: 
+          {{ images[currIndex].street_address }}, {{ images[currIndex].city }}</p>
+        <p v-else>location: {{ images[currIndex].city }}</p>
+        <p v-if="images[currIndex].district_title">district: 
+          {{ images[currIndex].district_title }}</p>
         <p>date: {{ images[currIndex].creation_year }}</p>
         <p>Courtesy of {{ images[currIndex].source_title }}</p>
       </header>
