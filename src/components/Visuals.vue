@@ -120,15 +120,18 @@
 
   <div class="images-menu" v-else-if="images"> <!-- If success in retrieving the image list -->
 
-  <figure class="gallery_item">
-    <a @click="showFullEntry(index)">
-      <img class="menu-image" 
-            :src="'http://admin.picturingurbanrenewal.org/media/visuals/thumbpics/' + image.slug + '-tn.jpg'">
-    </a>
-    <figcaption class="">
-      title goes here
-    </figcaption>
-  </figure>
+    <figure 
+      v-for="(image, index) of images" 
+      :key="image.index"
+      class="gallery_item">
+      <a @click="showFullEntry(index)">
+        <img class="menu-image" 
+              :src="'http://admin.picturingurbanrenewal.org/media/visuals/thumbpics/' + image.slug + '-tn.jpg'">
+      </a>
+      <figcaption class="">
+        {{ image.title}}
+      </figcaption>
+    </figure>
 
   </div>
 
