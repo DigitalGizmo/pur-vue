@@ -123,14 +123,15 @@
     <figure 
       v-for="(image, index) of images" 
       :key="image.index"
-      class="gallery_item">
+      class="images-menu-item">
       <a @click="showFullEntry(index)">
+        <figcaption class="menu-title">
+          {{ image.title}}
+        </figcaption>
         <img class="menu-image" 
               :src="'http://admin.picturingurbanrenewal.org/media/visuals/thumbpics/' + image.slug + '-tn.jpg'">
       </a>
-      <figcaption class="">
-        {{ image.title}}
-      </figcaption>
+
     </figure>
 
   </div>
@@ -249,37 +250,32 @@ export default {
 
 .images-menu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-gap: 1.25em .52em;
   margin: auto;
 }
 
-.gallery_item {
+.images-menu-item {
   box-sizing: border-box;
-  margin: auto;
+  margin: 0 auto;
   width: 100%;
-  padding: 1rem;
 }
-
-/*#menu-list li {
-  display: inline;
-}*/
-
-/* an attempt to include the title of the image but it messes up the layout*/
-/*#menu-list li a {
-  font-size: .5em;
-}*/
 
 .menu-image {
   width: 100%;
   display: block;
-/*  height: 150px;
-  width: auto;
-  margin: 3px;*/
 }
 
 .menu-image img {
-  height: 150px;
+  height: 100px;
+}
+
+.menu-title {
+  font-size: .75em;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .filters {
