@@ -118,17 +118,18 @@
 
   <div v-else-if="error">Error: {{ error.message }} </div>
 
-  <div v-else-if="images"> <!-- If success in retrieving the image list -->
-    <ul id="menu-list">
-      <li v-for="(image, index) of images" :key="image.index">
-        <div class="menu-item">
-          <a @click="showFullEntry(index)">
-            <img class="menu-image" 
+  <div class="images-menu" v-else-if="images"> <!-- If success in retrieving the image list -->
+
+  <figure class="gallery_item">
+    <a @click="showFullEntry(index)">
+      <img class="menu-image" 
             :src="'http://admin.picturingurbanrenewal.org/media/visuals/thumbpics/' + image.slug + '-tn.jpg'">
-          </a>
-        </div>
-      </li>
-    </ul>
+    </a>
+    <figcaption class="">
+      title goes here
+    </figcaption>
+  </figure>
+
   </div>
 
   <full-entry
@@ -242,39 +243,40 @@ export default {
 </script>
 
 <style>
-/*Don free-lancing*/
-#menu-list li {
-  display: inline;
+
+.images-menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 10px;
+  margin: auto;
 }
 
-.menu-item {
-  display: inline;
+.gallery_item {
+  box-sizing: border-box;
+  margin: auto;
+  width: 100%;
+  padding: 1rem;
 }
+
+/*#menu-list li {
+  display: inline;
+}*/
 
 /* an attempt to include the title of the image but it messes up the layout*/
-.menu-item a {
+/*#menu-list li a {
   font-size: .5em;
-  /*don test*/
-  /*display: inline;*/
-  /*position: relative;*/
-}
-
-.pic-title {
-  display: inline;
-  /*position: relative;*/
-  /*top: -20;*/
-  /*vertical-align: text-top;*/
-}
+}*/
 
 .menu-image {
-  height: 150px;
+  width: 100%;
+  display: block;
+/*  height: 150px;
   width: auto;
-  margin: 3px;
-  display: inline;
-  /*don test*/
-  /*clear: left;*/
-  /*position: relative;*/
-  /*top: 20px;*/
+  margin: 3px;*/
+}
+
+.menu-image img {
+  height: 150px;
 }
 
 .filters {
