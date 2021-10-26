@@ -76,6 +76,7 @@ h2 {
   border: 1px solid gray;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.75);
   color: black;
+  overflow:  auto;
   padding: 2em;
   position: relative;
 }

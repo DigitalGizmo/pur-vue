@@ -125,11 +125,12 @@
       :key="image.index"
       class="images-menu-item">
       <a @click="showFullEntry(index)">
+
+        <img class="menu-image" 
+              :src="'http://admin.picturingurbanrenewal.org/media/visuals/thumbpics/' + image.slug + '-tn.jpg'">
         <figcaption class="menu-title">
           {{ image.title}}
         </figcaption>
-        <img class="menu-image" 
-              :src="'http://admin.picturingurbanrenewal.org/media/visuals/thumbpics/' + image.slug + '-tn.jpg'">
       </a>
 
     </figure>
@@ -271,11 +272,12 @@ export default {
 }
 
 .menu-title {
+  color: grey;
   font-size: .75em;
-  width: 100%;
+/*  width: 100%;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis;*/
 }
 
 .filters {

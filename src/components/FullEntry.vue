@@ -3,7 +3,7 @@
     <div id="slimpop-wrapper" class="entry-pop">
       <p class="close">
         <a href="#" @click="prevEntry">Prev</a> |
-        <a href="#" @click="nextEntry">Next</a> <br/>
+        <a href="#" @click="nextEntry">Next</a> | 
         <a href="#" @click="closeFullEntry">Close</a>
       </p>
 
@@ -49,13 +49,18 @@ export default {
 }
 
 header {
-  max-width: 90%;
+  max-width: 80%;
+}
+
+header p {
+  font-size: .8em;
+  margin:  .4em auto;
 }
 
 p.close {
   font-size: .7em;
   letter-spacing: .05em;
-  max-width: 10%;
+  max-width: 20%;
   float: right;
 }
 
